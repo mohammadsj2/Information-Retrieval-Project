@@ -1,0 +1,17 @@
+from io import StringIO
+from IPython.core.display import display, HTML
+
+res = []
+for test in test_case:
+    display(HTML(f"<div><b>Title:</b> {test['title_query']}</div>"))
+    display(HTML(f"<div><b>Plot:</b> {test['plot_query']}</div>"))
+    res = search(test['title_query'], test['plot_query'], test['title_weight'], test['max_size'])
+    predicted = [x[0] for x in res]
+    display(HTML(f"<div><b>Predicted:</b> {predicted}</div>"))
+    for i, x in enumerate(res[:2]):
+        display(HTML(f"<div><b>{i+1}:</b></div>"))
+        display(HTML(f"<div>{x[1]}</div>"))
+        display(HTML(f"<div>{x[2]}</div><br>"))
+    display(HTML(f"<hr>"))
+    res.append(predicted)
+res
